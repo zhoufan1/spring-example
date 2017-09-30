@@ -21,6 +21,7 @@
     <modules>
         <module>config</module>
         <module>eureka</module>
+        <module>user</module>
     </modules>
 
     <properties>
