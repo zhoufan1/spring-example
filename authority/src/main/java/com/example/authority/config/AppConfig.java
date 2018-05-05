@@ -1,4 +1,4 @@
-package com.example.user.config;
+package com.example.authority.config;
 
 import com.google.common.collect.Lists;
 import feign.Retryer;
@@ -10,11 +10,13 @@ import org.springframework.cloud.netflix.feign.support.ResponseEntityDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import java.util.List;
 
-public class AppConifg extends WebMvcConfigurationSupport {
+@Configuration
+public class AppConfig extends WebMvcConfigurationSupport {
 
     private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INTANCE,
             FastJsonMessageConverter.INSTALL);

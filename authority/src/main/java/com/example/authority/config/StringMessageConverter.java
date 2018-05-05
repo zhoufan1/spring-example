@@ -1,4 +1,4 @@
-package com.example.user.config;
+package com.example.authority.config;
 
 import com.alibaba.fastjson.util.IOUtils;
 import org.springframework.http.converter.StringHttpMessageConverter;
