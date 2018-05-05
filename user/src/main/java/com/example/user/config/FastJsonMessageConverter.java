@@ -8,13 +8,14 @@ import com.example.user.common.DataFormat;
 import com.google.common.collect.Lists;
 import org.springframework.http.MediaType;
 
+import java.util.Arrays;
+
 public final class FastJsonMessageConverter extends FastJsonHttpMessageConverter {
-    public static final FastJsonHttpMessageConverter INSTANCE = new FastJsonHttpMessageConverter();
+    public static final FastJsonMessageConverter INSTANCE = new FastJsonMessageConverter();
 
     private FastJsonMessageConverter() {
         FastJsonConfig config = new FastJsonConfig();
         config.setCharset(IOUtils.UTF8);
-        config.setDateFormat(DataFormat.DatetimeFormat.name());
         config.setSerializerFeatures(SerializerFeature.SkipTransientField,
                 SerializerFeature.QuoteFieldNames,
                 SerializerFeature.WriteMapNullValue,
@@ -23,10 +24,15 @@ public final class FastJsonMessageConverter extends FastJsonHttpMessageConverter
                 SerializerFeature.WriteNullStringAsEmpty,
                 SerializerFeature.WriteNullBooleanAsFalse,
                 SerializerFeature.WriteDateUseDateFormat);
-        super.setDefaultCharset(IOUtils.UTF8);
         super.setFastJsonConfig(config);
-        super.setSupportedMediaTypes(Lists.newArrayList(MediaType.APPLICATION_JSON_UTF8,
-                MediaType.APPLICATION_JSON));
+
+        super.setDefaultCharset(IOUtils.UTF8);
+
+        super.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON,
+                MediaType.APPLICATION_JSON_UTF8,
+                MediaType.TEXT_HTML,
+                MediaType.APPLICATION_OCTET_STREAM));
+
     }
 
 }

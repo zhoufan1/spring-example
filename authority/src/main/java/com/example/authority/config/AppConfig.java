@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import feign.Retryer;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.cloud.netflix.feign.support.ResponseEntityDecoder;
@@ -22,9 +23,16 @@ import java.util.List;
 public class AppConfig extends WebMvcConfigurationSupport {
 
     private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INSTANCE,
-            FastJsonMessageConverter.INSTANCE,FormMessageConverter.INSTANCE);
+            FastJsonMessageConverter.INSTANCE, FormMessageConverter.INSTANCE);
 
 
+    private ObjectFactory<HttpMessageConverters> feignConverters;
+
+    @PostConstruct
+
+    public void initConfiguration() {
+        feignConverters = () -> new HttpMessageConverters(CONVERTERS);
+    }
 
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -40,4 +48,14 @@ public class AppConfig extends WebMvcConfigurationSupport {
         return Retryer.NEVER_RETRY;
     }
 
+    @Bean
+    public Decoder decoder() {
+        return new ResponseEntityDecoder(new SpringDecoder(feignConverters));
+    }
+
+    @Bean
+    public Encoder encoder() {
+//        return new SpringEncoder(() -> new HttpMessageConverters(StringMessageConverter.INSTANCE));
+        return new SpringEncoder(feignConverters);
+    }
 }

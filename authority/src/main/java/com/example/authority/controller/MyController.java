@@ -1,10 +1,10 @@
 package com.example.authority.controller;
 
-import javafx.util.Pair;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 @RestController
 public class MyController {
@@ -15,7 +15,11 @@ public class MyController {
     }
 
     @PostMapping("/test1")
-    public Pair<String,String> test(){
-        return new Pair<>("xxx", "nnn");
+    public HashMap test(){
+        return new HashMap() {
+            {
+                put("xx", "xx");
+            }
+        };
     }
 }

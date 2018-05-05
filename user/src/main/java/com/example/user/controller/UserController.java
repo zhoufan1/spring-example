@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/test1")
-    public Pair<String,String> test() {
+    public Map<String,String> test() {
         return userService.test1();
     }
 }
