@@ -3,6 +3,7 @@ package com.example.user.service;
 import com.example.user.client.AuthorityClient;
 import com.example.user.model.User;
 import com.example.user.repositorys.UserRepository;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,11 @@ public class UserService {
     public String welcome(String name){
         String welcome = authorityClient.helloWorld(name);
         return welcome;
+    }
+
+    public Pair test1(){
+        Pair<String, String> test = authorityClient.test();
+        return test;
     };
 
     public List<User> findAll() {

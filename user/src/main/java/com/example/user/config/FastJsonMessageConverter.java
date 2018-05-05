@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import org.springframework.http.MediaType;
 
 public final class FastJsonMessageConverter extends FastJsonHttpMessageConverter {
-    public static final FastJsonHttpMessageConverter INSTALL = new FastJsonHttpMessageConverter();
+    public static final FastJsonHttpMessageConverter INSTANCE = new FastJsonHttpMessageConverter();
 
     private FastJsonMessageConverter() {
         FastJsonConfig config = new FastJsonConfig();

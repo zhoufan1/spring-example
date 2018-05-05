@@ -14,22 +14,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Configuration
 public class AppConfig extends WebMvcConfigurationSupport {
 
-    private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INTANCE,
-            FastJsonMessageConverter.INSTALL,new FormHttpMessageConverter());
+    private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INSTANCE,
+            FastJsonMessageConverter.INSTANCE,FormMessageConverter.INSTANCE);
 
-    private ObjectFactory<HttpMessageConverters> feignConverter = () -> new HttpMessageConverters(CONVERTERS);
 
 
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
+        converters.addAll(CONVERTERS);
     }
-
 
     /**
      * 禁用 Feign 调用出错重试
@@ -39,13 +40,4 @@ public class AppConfig extends WebMvcConfigurationSupport {
         return Retryer.NEVER_RETRY;
     }
 
-    @Bean
-    public Decoder decoder() {
-        return new ResponseEntityDecoder(new SpringDecoder(feignConverter));
-    }
-
-    @Bean
-    public Encoder encoder() {
-        return new SpringEncoder(feignConverter);
-    }
 }

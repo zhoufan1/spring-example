@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import feign.Retryer;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.cloud.netflix.feign.support.ResponseEntityDecoder;
@@ -15,23 +16,21 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Configuration
 public class AppConfig extends WebMvcConfigurationSupport {
 
-    private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INTANCE,
-            FastJsonMessageConverter.INSTALL,new FormHttpMessageConverter(),new SourceHttpMessageConverter<>());
-
-    private ObjectFactory<HttpMessageConverters> feignConverter = () -> new HttpMessageConverters(CONVERTERS);
-
+    private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INSTANCE,
+            FastJsonMessageConverter.INSTANCE,FormMessageConverter.INSTANCE);
 
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.addAll(converters);
         super.configureMessageConverters(converters);
+        converters.addAll(CONVERTERS);
     }
-
 
     /**
      * 禁用 Feign 调用出错重试
@@ -41,13 +40,4 @@ public class AppConfig extends WebMvcConfigurationSupport {
         return Retryer.NEVER_RETRY;
     }
 
-    @Bean
-    public Decoder decoder() {
-        return new ResponseEntityDecoder(new SpringDecoder(feignConverter));
-    }
-
-    @Bean
-    public Encoder encoder() {
-        return new SpringEncoder(feignConverter);
-    }
 }

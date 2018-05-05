@@ -1,5 +1,6 @@
 package com.example.user.client;
 
+import javafx.util.Pair;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,4 +16,7 @@ public interface AuthorityClient {
 
     @PostMapping("/hello")
     String helloWorld(@RequestParam("nickName") String nickName);
+
+    @PostMapping("/test1")
+    Pair<String, String> test();
 }

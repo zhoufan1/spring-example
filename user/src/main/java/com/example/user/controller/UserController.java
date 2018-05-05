@@ -2,6 +2,7 @@ package com.example.user.controller;
 
 import com.example.user.model.User;
 import com.example.user.service.UserService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +34,10 @@ public class UserController {
         String welcome = userService.welcome(name);
         return welcome;
 
+    }
+
+    @PostMapping("/test1")
+    public Pair<String,String> test() {
+        return userService.test1();
     }
 }
