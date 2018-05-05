@@ -1,22 +1,16 @@
 package com.example.authority.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyController {
-    @Value("${nickname}")
-    private String nickName;
 
-    @RequestMapping("/hello")
-    public String helloWorld() {
+    @PostMapping("/hello")
+    public String helloWorld(@RequestParam("nickName") String nickName) {
         return "hello ,".concat(nickName);
     }
 
-
-    @RequestMapping("/hello2")
-    public String helloWorld2() {
-        return "hello ,".concat(nickName);
-    }
 }

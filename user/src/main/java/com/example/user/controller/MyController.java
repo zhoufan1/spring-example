@@ -15,8 +15,4 @@ public class MyController {
     }
 
 
-    @RequestMapping("/hello2")
-    public String helloWorld2() {
-        return "hello ,".concat(nickName);
-    }
 }

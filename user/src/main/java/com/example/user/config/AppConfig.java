@@ -10,16 +10,20 @@ import org.springframework.cloud.netflix.feign.support.ResponseEntityDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringDecoder;
 import org.springframework.cloud.netflix.feign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import java.util.List;
 
-public class AppConifg extends WebMvcConfigurationSupport {
+@Configuration
+public class AppConfig extends WebMvcConfigurationSupport {
 
     private final List<HttpMessageConverter<?>> CONVERTERS = Lists.newArrayList(StringMessageConverter.INTANCE,
-            FastJsonMessageConverter.INSTALL);
+            FastJsonMessageConverter.INSTALL,new FormHttpMessageConverter(),new SourceHttpMessageConverter<>());
 
-    private ObjectFactory<HttpMessageConverters> feignconverter = () -> new HttpMessageConverters(CONVERTERS);
+    private ObjectFactory<HttpMessageConverters> feignConverter = () -> new HttpMessageConverters(CONVERTERS);
 
 
     @Override
@@ -39,11 +43,11 @@ public class AppConifg extends WebMvcConfigurationSupport {
 
     @Bean
     public Decoder decoder() {
-        return new ResponseEntityDecoder(new SpringDecoder(feignconverter));
+        return new ResponseEntityDecoder(new SpringDecoder(feignConverter));
     }
 
     @Bean
     public Encoder encoder() {
-        return new SpringEncoder(feignconverter);
+        return new SpringEncoder(feignConverter);
     }
 }

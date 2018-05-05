@@ -22,7 +22,6 @@
         <module>config</module>
         <module>eureka</module>
         <module>user</module>
-        <module>docker</module>
         <module>authority</module>
     </modules>
 
