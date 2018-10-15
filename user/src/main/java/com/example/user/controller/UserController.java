@@ -25,14 +25,12 @@ public class UserController {
 
     @RequestMapping("/findUserByUserName")
     public User findUserByUserName(@RequestParam("userName") String userName){
-        User userByUserName = userService.findUserByUserName(userName);
-        return userByUserName;
+        return userService.findUserByUserName(userName);
     }
 
     @PostMapping("/welcome")
     public String welcome(@RequestParam("name") String name){
-        String welcome = userService.welcome(name);
-        return welcome;
+        return userService.welcome(name);
 
     }
 

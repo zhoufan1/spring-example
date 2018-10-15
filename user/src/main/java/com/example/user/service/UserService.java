@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhou.fan
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserService {
     @Autowired
     private UserRepository userRepository;
@@ -20,13 +23,11 @@ public class UserService {
     private AuthorityClient authorityClient;
 
     public String welcome(String name) {
-        String welcome = authorityClient.helloWorld(name);
-        return welcome;
+        return authorityClient.helloWorld(name);
     }
 
-    public Map test1() {
-        Map<String, String> test = authorityClient.test();
-        return test;
+    public Map<String, String> test1() {
+        return authorityClient.test();
     }
 
 
