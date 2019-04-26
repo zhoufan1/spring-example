@@ -26,7 +26,7 @@
     </modules>
 
     <properties>
-        <lproject.build.sourceEncoding>UTF-8</lproject.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Dalston.SR1</spring-cloud.version>
