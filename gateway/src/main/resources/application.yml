@@ -1,0 +1,11 @@
+
+zuul:
+  routes:
+    user:
+      serviceId: user-service
+      path: /user/**
+      stripPrefix: false
+    authority:
+      serviceId: authority-service
+      path: /authority/**
+      stripPrefix: false
