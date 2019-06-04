@@ -1,5 +1,6 @@
 package com.example.foundation.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class Response<T> {
     private String code;
     private String message;

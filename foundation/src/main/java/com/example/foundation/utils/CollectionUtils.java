@@ -1,17 +1,11 @@
 package com.example.foundation.utils;
 
-/**
- * @author zhoufan
- * @date 2019/6/3 17:52
- * @description
- */
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
