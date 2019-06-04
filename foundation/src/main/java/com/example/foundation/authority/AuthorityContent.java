@@ -7,9 +7,9 @@ package com.example.foundation.authority;
  */
 public final class AuthorityContent {
     private AuthoritySession authoritySession;
-    private ThreadLocal<AuthorityContent> holder = ThreadLocal.withInitial(AuthorityContent::new);
+    private static ThreadLocal<AuthorityContent> holder = ThreadLocal.withInitial(AuthorityContent::new);
 
-    private AuthorityContent get() {
+    public static AuthorityContent get() {
         return holder.get();
     }
 

@@ -1,4 +1,4 @@
-package com.example.user.common;
+package com.example.foundation.utils;
 
 /**
  * @author zhou.fan
