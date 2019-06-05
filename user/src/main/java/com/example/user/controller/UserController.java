@@ -1,14 +1,17 @@
 package com.example.user.controller;
 
+import com.example.foundation.dto.Response;
+import com.example.user.dto.response.UserResponse;
 import com.example.user.model.User;
 import com.example.user.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -34,8 +37,11 @@ public class UserController {
 
     }
 
-    @PostMapping("/test1")
-    public Map<String,String> test() {
-        return userService.test1();
+    @PostMapping("/login")
+    public Response<UserResponse> login(@RequestBody User user) {
+        User userResult = userService.login(user);
+        UserResponse response = new UserResponse();
+        BeanUtils.copyProperties(userResult,response);
+        return Response.success(response);
     }
 }

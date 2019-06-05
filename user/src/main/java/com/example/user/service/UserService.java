@@ -6,7 +6,6 @@ import com.example.user.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +36,9 @@ public class UserService {
 
     public User findUserByUserName(String userName) {
         return userRepository.findUserByUserName(userName);
+    }
+
+    public User login(User user) {
+        return userRepository.findUserByUserNameAndUserPass(user.getUserName(),user.getUserPass());
     }
 }
