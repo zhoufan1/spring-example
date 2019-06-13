@@ -1,5 +1,6 @@
 package com.example.foundation.exception;
 
+import com.example.foundation.dto.BaseCode;
 import lombok.Data;
 
 /**
@@ -9,14 +10,18 @@ import lombok.Data;
  */
 @Data
 public class BusinessException extends RuntimeException{
-    private String code;
-    private String message;
-    private Object data;
+    private BaseCode code;
+    private Throwable cause;
 
-    public BusinessException(String message, String code) {
-        super(message);
+    public BusinessException(BaseCode code) {
+        super(code.getCode());
         this.code = code;
-        this.message = message;
+        this.cause = cause;
     }
 
+    public BusinessException(BaseCode code, Throwable cause) {
+        super(code.getCode(),cause);
+        this.code = code;
+        this.cause = cause;
+    }
 }

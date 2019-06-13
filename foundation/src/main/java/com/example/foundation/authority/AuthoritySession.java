@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthoritySession {
     public static final String X_Authority_Header = "X-Authority";
-    private String userId;
+    private Integer Id;
     private String version;
     private String clientIp;
     private Long clientTime;

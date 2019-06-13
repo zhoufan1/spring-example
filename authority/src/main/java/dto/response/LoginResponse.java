@@ -1,4 +1,4 @@
-package com.example.user.dto.response;
+package dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoufan
- * @date 2019/6/5 10:41
+ * @date 2019/6/13 09:59
  * @description
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class UserResponse {
-    private Integer id;
+public class LoginResponse {
+    private Integer Id;
     private String userName;
-    private Integer userAge;
+    private String userSex;
 }

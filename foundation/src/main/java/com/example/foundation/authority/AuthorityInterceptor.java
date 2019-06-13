@@ -30,7 +30,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             AuthoritySession authoritySession = JSON.parseObject(authority, AuthoritySession.class);
             AuthorityContent.get().setAuthoritySession(authoritySession);
         }
-        return false;
+        return true;
     }
 
     @Override
