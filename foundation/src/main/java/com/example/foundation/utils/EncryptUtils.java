@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.List;
@@ -16,7 +17,7 @@ public final class EncryptUtils {
     private static final String SALT = "2_~!@==#$++%^&*(121)";
     private static MessageDigest SHA1;
     private static MessageDigest MD5;
-    public final static Charset UTF8 = Charset.forName("UTF-8");
+    private final static Charset UTF8 = StandardCharsets.UTF_8;
 
     static {
         try {
@@ -67,7 +68,9 @@ public final class EncryptUtils {
             fis = new FileInputStream(file);
             dis = new DigestInputStream(fis, MD5);
             byte[] buffer = new byte[256 * 1024];
-            while (dis.read(buffer) > 0) ;
+            while (true) {
+                if (dis.read(buffer) <= 0) break;
+            };
             return toHex(dis.getMessageDigest().digest()).toLowerCase();
         } catch (Exception e) {
             throw new RuntimeException("");
@@ -183,11 +186,14 @@ public final class EncryptUtils {
                         case 'f':
                             aChar = '\f';
                             break;
+                        default:
+                            break;
                     }
                     outBuffer.append(aChar);
                 }
-            } else
+            } else {
                 outBuffer.append(aChar);
+            }
         }
         return outBuffer.toString();
     }

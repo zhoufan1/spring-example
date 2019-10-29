@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class GeoHashUtils {
 
-    //地球半径,单位米
+    /** 地球半径,单位米 */
     private static final double EARTH_RADIUS = 6378137;
     private static final BigDecimal BD2 = new BigDecimal(2);
     private static final int SCALE = 6;

@@ -1,12 +1,11 @@
 package com.example.foundation.serializer;
 
 import com.fasterxml.jackson.databind.BeanDescription;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class BeanSerializer extends BeanSerializerModifier {
 
@@ -27,10 +26,14 @@ public class BeanSerializer extends BeanSerializerModifier {
         return beanProperties;
     }
 
-    // 判断是什么类型
-    protected boolean isArrayType(BeanPropertyWriter writer) {
-        Class<?> clazz = writer.getPropertyType();
-        return clazz.isArray() || clazz.equals(List.class) || clazz.equals(Set.class) || clazz.equals(Collection.class);
+    /**
+     * 判断是不是数组类型
+     * @param writer
+     * @return
+     */
+    private boolean isArrayType(BeanPropertyWriter writer) {
+        JavaType clazz = writer.getType();
+        return clazz.isArrayType() || clazz.isCollectionLikeType();
 
     }
 

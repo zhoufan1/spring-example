@@ -18,9 +18,9 @@ import java.util.Map;
 public class MapJsonSerializer extends JsonSerializer<Map> {
     private final Class<?>[] clazz = {Integer.class, Double.class, Float.class, Long.class, Short.class, Byte.class, Boolean.class, Character.class};
 
-    public final static MapJsonSerializer instance = new MapJsonSerializer();
+    public final static MapJsonSerializer INSTANCE = new MapJsonSerializer();
 
-
+    @Override
     public void serialize(Map value, JsonGenerator generator, SerializerProvider provider)
             throws IOException {
         generator.writeStartObject();

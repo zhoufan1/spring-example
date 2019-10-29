@@ -114,9 +114,9 @@ public class WebConfigurationSupport extends WebMvcConfigurationSupport {
                     return;
                 }
                 HttpServletRequest request = requestAttributes.getRequest();
-                String authorityHeader = request.getHeader(AuthoritySession.X_Authority_Header);
+                String authorityHeader = request.getHeader(AuthoritySession.X_AUTHORITY_HEADER);
                 if (StringUtils.isNotBlank(authorityHeader)) {
-                    requestTemplate.header(AuthoritySession.X_Authority_Header, authorityHeader);
+                    requestTemplate.header(AuthoritySession.X_AUTHORITY_HEADER, authorityHeader);
                 }
             };
 

@@ -20,8 +20,8 @@ import java.util.Map;
 
 @Slf4j
 public final class JacksonUtils {
-    private final static ObjectMapper mapper = new ObjectMapper();
-    private final static TypeFactory typeFactory = mapper.getTypeFactory();
+    private final static ObjectMapper MAPPER = new ObjectMapper();
+    private final static TypeFactory TYPEFACTORY = MAPPER.getTypeFactory();
 
     private JacksonUtils() {
 
@@ -31,26 +31,26 @@ public final class JacksonUtils {
         SimpleModule module = new SimpleModule();
         module.addSerializer(Number.class, ToStringSerializer.instance);
         module.addSerializer(Boolean.class, ToStringSerializer.instance);
-        module.addSerializer(int[].class, ArrayJsonSerializer.instance);
-        module.addSerializer(Map.class, MapJsonSerializer.instance);
+        module.addSerializer(int[].class, ArrayJsonSerializer.INSTANCE);
+        module.addSerializer(Map.class, MapJsonSerializer.INSTANCE);
 //        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        mapper.setSerializerFactory(mapper.getSerializerFactory().withSerializerModifier(new BeanSerializer()));
-        mapper.registerModule(module);
-        mapper.setDateFormat(new SimpleDateFormat(DataFormatEnum.StrikeDateTime.realVal()));
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        MAPPER.setSerializerFactory(MAPPER.getSerializerFactory().withSerializerModifier(new BeanSerializer()));
+        MAPPER.registerModule(module);
+        MAPPER.setDateFormat(new SimpleDateFormat(DataFormatEnum.StrikeDateTime.realVal()));
+        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static ObjectMapper instance() {
-        return mapper;
+        return MAPPER;
     }
 
     public static TypeFactory getTypeFactory() {
-        return typeFactory;
+        return TYPEFACTORY;
     }
 
     public static String toJSONString(Object o) {
         try {
-            return mapper.writeValueAsString(o);
+            return MAPPER.writeValueAsString(o);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public final class JacksonUtils {
     public static <T> T parseObject(Class<T> type, String json) {
 
         try {
-            return mapper.readValue(json, type);
+            return MAPPER.readValue(json, type);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,7 @@ public final class JacksonUtils {
     public static <T> List<T> parseCollection(Class<T> type, String json) {
         try {
             CollectionType collectionType = getTypeFactory().constructCollectionType(List.class, type);
-            return mapper.readValue(json, collectionType);
+            return MAPPER.readValue(json, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public final class JacksonUtils {
     public static <T> T[] parseArray(Class<T> type, String json) {
         try {
             ArrayType collectionType = getTypeFactory().constructArrayType(type);
-            return mapper.readValue(json, collectionType);
+            return MAPPER.readValue(json, collectionType);
         } catch (IOException e) {
             e.printStackTrace();
         }

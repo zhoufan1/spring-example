@@ -1,11 +1,13 @@
-package feign;
+package com.example.authority.feign;
 
+import com.example.authority.dto.UserResponse;
+import com.example.authority.dto.request.LoginRequest;
+import com.example.authority.dto.response.LoginResponse;
 import com.example.foundation.dto.Response;
-import dto.request.LoginRequest;
-import dto.response.LoginResponse;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author zhoufan
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @description
  */
 @FeignClient("user-service")
+@RequestMapping("/user")
 public interface UserClient {
 
     @RequestMapping("/users/login")
     Response<LoginResponse> login(@RequestBody LoginRequest request);
+
+    @RequestMapping("userInfo/findUserByUserName")
+    Response<UserResponse> findUserByUserName(@RequestParam("userName") String userName);
 }

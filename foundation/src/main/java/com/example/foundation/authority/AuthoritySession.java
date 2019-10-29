@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthoritySession {
-    public static final String X_Authority_Header = "X-Authority";
+    public static final String X_AUTHORITY_HEADER = "X-Authority";
     private Integer Id;
     private String version;
     private String clientIp;

@@ -22,7 +22,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String UTF8 = IOUtils.UTF8.name();
         request.setCharacterEncoding(UTF8);
-        String authorityByte = request.getHeader(AuthoritySession.X_Authority_Header);
+        String authorityByte = request.getHeader(AuthoritySession.X_AUTHORITY_HEADER);
         if (StringUtils.isNotBlank(authorityByte)) {
             log.info("get authority data :{}", authorityByte);
             String authority = new String(Base64.getDecoder().decode(authorityByte.getBytes()), UTF8);
