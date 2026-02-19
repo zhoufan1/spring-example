@@ -20,7 +20,7 @@
         <!-- 工具 -->
         <fastjson.vesrsion>1.2.34</fastjson.vesrsion>
         <guava.version>21.0</guava.version>
-        <commons-lang3.version>3.5</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
     </properties>
 
     <dependencies>
